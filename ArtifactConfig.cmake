@@ -26,13 +26,13 @@ endfunction()
 # The name of function must consist of folder name (gcc-arm-none-eabi) and postfix 
 # (_ArtifactInstall). Otherwise the buildprocess will fail.  
 #
-# ARTIFACT_VERSION [out]: Version of artifact in format X.Y.Z
+# ARTIFACT_BIN_PATH_ARG [in]: Path to the binary part of artifact
 #------------------------------------------------------------------------------#
-function(gcc-arm-none-eabi_ArtifactInit)
+function(gcc-arm-none-eabi_ArtifactInit ARTIFACT_BIN_PATH_ARG)
 
     if(${CMAKE_HOST_SYSTEM_NAME} STREQUAL "Windows")
     
-        file(GLOB_RECURSE ALL_CONFIG_FILES "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/*arm-none-eabi-gcc.*")
+        file(GLOB_RECURSE ALL_CONFIG_FILES "${ARTIFACT_BIN_PATH_ARG}/*arm-none-eabi-gcc.*")
     
         foreach(FILE_PATH IN LISTS ALL_CONFIG_FILES)
             if(FILE_PATH MATCHES "arm-none-eabi-gcc.exe")
@@ -47,9 +47,9 @@ function(gcc-arm-none-eabi_ArtifactInit)
             
             set(ENV{PATH} "${CONFIG_DIR};$ENV{PATH}")
             
-            set(ENV{PATH} "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/;$ENV{PATH}")
+            set(ENV{PATH} "${ARTIFACT_BIN_PATH_ARG}/;$ENV{PATH}")
             
-                        if(EXISTS "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake")
+            if(EXISTS "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake")
             
                 set(CMAKE_TOOLCHAIN_FILE "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake" CACHE FILEPATH "Toolchain file")
                 
@@ -67,7 +67,7 @@ function(gcc-arm-none-eabi_ArtifactInit)
         
     else()
     
-        file(GLOB_RECURSE ALL_CONFIG_FILES "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/*arm-none-eabi-gcc")
+        file(GLOB_RECURSE ALL_CONFIG_FILES "${ARTIFACT_BIN_PATH_ARG}/*arm-none-eabi-gcc")
     
         foreach(FILE_PATH IN LISTS ALL_CONFIG_FILES)
             if(FILE_PATH MATCHES "arm-none-eabi-gcc")
@@ -82,7 +82,7 @@ function(gcc-arm-none-eabi_ArtifactInit)
             
             set(ENV{PATH} "${CONFIG_DIR}:$ENV{PATH}")
             
-            set(ENV{PATH} "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}:$ENV{PATH}")
+            set(ENV{PATH} "${ARTIFACT_BIN_PATH_ARG}:$ENV{PATH}")
             
             if(EXISTS "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake")
             
