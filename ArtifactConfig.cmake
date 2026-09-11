@@ -51,7 +51,7 @@ function(gcc-arm-none-eabi_ArtifactInit ARTIFACT_BIN_PATH_ARG)
             
             if(EXISTS "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake")
             
-                set(CMAKE_TOOLCHAIN_FILE "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake" CACHE FILEPATH "Toolchain file")
+                set(CMAKE_TOOLCHAIN_FILE "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake" CACHE FILEPATH "Toolchain file" FORCE)
                 
             else()
             
@@ -86,7 +86,7 @@ function(gcc-arm-none-eabi_ArtifactInit ARTIFACT_BIN_PATH_ARG)
             
             if(EXISTS "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake")
             
-                set(CMAKE_TOOLCHAIN_FILE "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake" CACHE FILEPATH "Toolchain file")
+                set(CMAKE_TOOLCHAIN_FILE "${GCC-ARM-NONE-EABI_CURRENT_LIST_DIR}/gcc-arm-none-eabi.cmake" CACHE FILEPATH "Toolchain file" FORCE)
                 
             else()
             
@@ -101,5 +101,7 @@ function(gcc-arm-none-eabi_ArtifactInit ARTIFACT_BIN_PATH_ARG)
         endif()
     
     endif()
+	
+	message(DEBUG "Toolchain file was set to: ${CMAKE_TOOLCHAIN_FILE}")
 
 endfunction()
